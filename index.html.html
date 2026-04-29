@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vxtsensi.in</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&display=swap');
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+
+        body {
+            background-color: #0b0c10;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: #1f2833;
+            border: 2px solid #66fcf1;
+            border-radius: 15px;
+            padding: 25px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 0 25px rgba(102, 252, 241, 0.2);
+        }
+
+        h1 {
+            font-family: 'Teko', sans-serif;
+            text-align: center;
+            color: #66fcf1;
+            font-size: 3rem;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .subtitle { text-align: center; color: #45a29e; margin-bottom: 25px; font-size: 0.9rem; letter-spacing: 1px; }
+
+        .form-group { margin-bottom: 15px; }
+
+        label { display: block; margin-bottom: 5px; color: #c5c6c7; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            background: #0b0c10;
+            color: #fff;
+            border: 1px solid #45a29e;
+            border-radius: 8px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        button.main-btn {
+            width: 100%;
+            padding: 15px;
+            background: #66fcf1;
+            color: #0b0c10;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'Teko', sans-serif;
+            text-transform: uppercase;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        button.main-btn:hover { background: #45a29e; color: white; box-shadow: 0 0 20px #66fcf1; }
+
+        /* Telegram Contact Animation Section */
+        .tg-container {
+            margin-top: 25px;
+            text-align: center;
+            border-top: 1px dashed #45a29e;
+            padding-top: 20px;
+        }
+
+        .tg-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            background: #0088cc;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            gap: 10px;
+            transition: 0.3s;
+            position: relative;
+            animation: pulse-tg 2s infinite;
+        }
+
+        @keyframes pulse-tg {
+            0% { box-shadow: 0 0 0 0 rgba(0, 136, 204, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 136, 204, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(75, 112, 131, 0); }
+        }
+
+        .tg-link:hover {
+            transform: translateY(-3px);
+            background: #00aaff;
+        }
+
+        /* Standard Result Styles */
+        #loader {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+            color: #66fcf1;
+        }
+
+        .scanning-bar {
+            width: 100%;
+            height: 4px;
+            background: #0b0c10;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scanning-bar::after {
+            content: '';
+            position: absolute;
+            width: 40%;
+            height: 100%;
+            background: #66fcf1;
+            box-shadow: 0 0 10px #66fcf1;
+            animation: move 1s infinite linear;
+        }
+
+        @keyframes move {
+            0% { left: -40%; }
+            100% { left: 100%; }
+        }
+
+        #results { display: none; margin-top: 20px; animation: fadeIn 0.5s; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .ai-card {
+            background: rgba(102, 252, 241, 0.05);
+            border: 1px solid rgba(102, 252, 241, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .ai-header { color: #66fcf1; font-weight: bold; font-size: 0.9rem; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
+
+        .sensi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+
+        .sensi-box {
+            background: #0b0c10;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #1f2833;
+            text-align: center;
+        }
+
+        .label-text { font-size: 0.7rem; color: #45a29e; display: block; }
+        .val-text { font-size: 1.2rem; font-weight: bold; color: #66fcf1; font-family: 'Teko', sans-serif; }
+
+        .extra-tips {
+            font-size: 0.8rem;
+            color: #c5c6c7;
+            border-top: 1px solid #1f2833;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .tip-item { display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .tip-val { color: #66fcf1; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>VXTSENSI.HUB</h1>
+        <p class="subtitle">PREFETCHING PRO DEVICE SETTINGS</p>
+
+        <div class="form-group">
+            <label>Select Device Brand</label>
+            <select id="brand">
+                <option value="select">Select Your Device</option>
+                <option value="samsung">Samsung</option>
+                <option value="xiaomi">Xiaomi / Poco / Redmi</option>
+                <option value="apple">Apple (iPhone/iPad)</option>
+                <option value="realme">Realme</option>
+                <option value="vivo">Vivo / iQOO</option>
+                <option value="oppo">Oppo</option>
+                <option value="oneplus">OnePlus</option>
+                <option value="infinix">Infinix / Tecno</option>
+                <option value="rog">ASUS ROG / Gaming Phone</option>
+                <option value="other">Other Android</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>RAM / Performance Tier</label>
+            <select id="ram">
+                <option value="select">Select Your Device RAM</option>
+                <option value="low">2GB - 4GB (Low End)</option>
+                <option value="mid">6GB - 8GB (Mid Range)</option>
+                <option value="high">12GB+ (High End)</option>
+            </select>
+        </div>
+
+        <button class="main-btn" onclick="runAI()">Generate Sensi</button>
+
+        <div id="loader">
+            <p style="font-family: 'Teko';">MATCHING HARDWARE DATA...</p>
+            <div class="scanning-bar"></div>
+        </div>
+
+        <div id="results">
+            <div class="ai-card">
+                <div class="ai-header">🤖 AI LOGIC ANALYSIS</div>
+                <p id="ai-msg" style="font-size: 0.85rem; color: #c5c6c7;"></p>
+            </div>
+
+            <div class="sensi-grid" id="sensi-container"></div>
+
+            <div class="ai-card">
+                <div class="ai-header">⚙️ ADVANCED PREFETCH DATA</div>
+                <div class="extra-tips">
+                    <div class="tip-item"><span>Recommended DPI:</span> <span class="tip-val" id="dpi-val">Standard</span></div>
+                    <div class="tip-item"><span>Fire Button Size:</span> <span class="tip-val" id="btn-val">45%</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tg-container">
+            <p style="font-size: 0.7rem; color: #45a29e; margin-bottom: 10px; text-transform: uppercase;">Need custom HUD? Contact Dev</p>
+            <a href="https://t.me/+zJ4Hve45qUY4NTk9" target="_blank" class="tg-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
+                JOIN TELEGRAM
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function runAI() {
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('loader').style.display = 'block';
+
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+                calculateSensi();
+            }, 1200);
+        }
+
+        function calculateSensi() {
+            const brand = document.getElementById('brand').value;
+            const ram = document.getElementById('ram').value;
+            const rng = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+            
+            let gen, red, s2, s4, snp, look, dpi, btn;
+            let msg = "";
+
+            if (brand === 'apple') {
+                gen = rng(82, 92); red = rng(85, 95); s2 = 80; s4 = 75; snp = 50; look = 60;
+                dpi = "Default (iOS Optimization)"; btn = "42%";
+                msg = "iOS touch-sampling is ultra-high. Lowered General to prevent 'shaking'.";
+            } else if (brand === 'rog') {
+                gen = rng(80, 88); red = rng(80, 90); s2 = 75; s4 = 70; snp = 45; look = 50;
+                dpi = "380 - 410"; btn = "48%";
+                msg = "Gaming hardware detected. High refresh rate (144Hz+) settings applied.";
+            } else if (brand === 'infinix' || ram === 'low') {
+                gen = 100; red = 100; s2 = 95; s4 = 90; snp = 60; look = 80;
+                dpi = "450 - 520"; btn = "55%";
+                msg = "Standard hardware detected. Maxing sensitivity for touch response.";
+            } else {
+                gen = rng(95, 100); red = rng(92, 98); s2 = 90; s4 = 88; snp = 50; look = 75;
+                dpi = "411 - 460"; btn = "48%";
+                msg = "Universal Android touch driver profile generated for your brand.";
+            }
+
+            document.getElementById('ai-msg').innerText = msg;
+            document.getElementById('dpi-val').innerText = dpi;
+            document.getElementById('btn-val').innerText = btn;
+
+            const sensiData = [
+                { l: "GENERAL", v: gen }, { l: "RED DOT", v: red },
+                { l: "2X SCOPE", v: s2 }, { l: "4X SCOPE", v: s4 },
+                { l: "SNIPER", v: snp }, { l: "FREE LOOK", v: look }
+            ];
+
+            const container = document.getElementById('sensi-container');
+            container.innerHTML = '';
+            sensiData.forEach(item => {
+                container.innerHTML += `
+                    <div class="sensi-box">
+                        <span class="label-text">${item.l}</span>
+                        <span class="val-text">${item.v}</span>
+                    </div>`;
+            });
+
+            document.getElementById('results').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
